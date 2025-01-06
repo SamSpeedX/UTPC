@@ -22,5 +22,42 @@ The UTPC questionner website is designed to manage and present questions for use
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/SamSpeedX/UTPC.git
+   git clone https://github.com/SamSpeedX/UTPC
    cd UTPC
+   ```
+
+2. Install dependencies:
+   ```bash
+   php sam run:installer
+   ```
+
+3. Set up the database:
+   - Create a new database for the project.
+   - Configure the database connection in the `.env` file.
+
+
+4. Serve the application:
+   ```bash
+   php sam serve
+   ```
+
+## Usage
+
+1. Navigate to `http://localhost:8000` in your web browser.
+2. Register or log in to your account.
+3. Start creating and managing questions.
+
+## Contributing
+
+Contributions are welcome! Please submit a pull request or open an issue to discuss your changes.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- [Kibalanga PHP Framework](https://github.com/SamTechnologyTz/kibalanga) for providing a robust PHP framework.
+```
+
+You can customize this template further based on the specific details of your project.
