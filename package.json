@@ -1,0 +1,11 @@
+{
+    "name": "sam_ochu",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+      "start": "php sam serve",
+      "dev": "php sam serve",
+      "install": "php sam run:installer"
+    }
+}
