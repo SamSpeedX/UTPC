@@ -74,15 +74,24 @@ class Router
                 echo "Invalid method!";
             }
 
-            $request = $_GET;
+            // $request = $_GET;
             $controllerFile = "App/Controller/{$controller}.php";
 
             if (file_exists($controllerFile)) {
-                require $controllerFile;
 
-                $action = new $controller();
-                $response =  $action->$function($request);
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    $request = $_GET;
+                    require $controllerFile; 
+                    $action = new $controller();
+                    $function = $controllerClass[1];
+                    $questions = $action->$function($request);
+                    $response = $action->$function($request);
+                    // require $view;
 
+                    // var_dump($response);
+                    echo $response['message'];
+
+                }
             } else {
                 echo "No such Controller";
             }
@@ -101,11 +110,16 @@ class Router
             $view = "views/{$callback}.sam.php";
     
             if (file_exists($view) === file_exists($view)) {
-    
-                require $controllerFile; 
-                $action = new $controller();
-                $function = $controllerClass[1];
-                require $view;
+
+                if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+                    $request = $_GET;
+                    require $controllerFile; 
+                    $action = new $controller();
+                    $function = $controllerClass[1];
+                    $questions = $action->$function($request);
+                    $response = $action->$function($request);
+                    require $view;
+                }
                 
             } else {
                 echo"No such folder or your file don't have the following extension .sam.php";

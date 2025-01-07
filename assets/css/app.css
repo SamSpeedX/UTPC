@@ -18,7 +18,7 @@ body {
     height: 10rem;
     top: 0;
     background-color: rgb(80, 80, 255);
-    border-bottom: 1px solid yellow;
+    border-bottom: 2px solid yellow;
 }
 
 .main {
@@ -116,7 +116,7 @@ nav ul li a:hover {
 
 /* Main Content */
 .main-content {
-    flex-grow: 1;
+    width: 50%;
     padding: 2rem;
     position: relative;
 }
@@ -135,17 +135,17 @@ header p {
 .overview {
     display: flex;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 .card {
     color: #fff;
-    flex: 1;
+    /* flex: 1; */
     padding: 1.5rem;
     background-color: #aba2f8;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* text-align: center; */
+
 }
 
 .card h3 {
@@ -166,11 +166,9 @@ footer {
     width: 100%;
     padding: 1rem;
     text-align: center;
-    /* position: absolute; */
-    /* bottom: 0; */
     color: #fff;
     background-color: rgb(80, 80, 255);
-    border-top: 1px solid yellow;
+    border-top: 2px solid yellow;
 }
 
 .copy {
@@ -186,21 +184,189 @@ footer {
     text-decoration: none;
 }
 
+/* teble */
+table {
+    width: 90%;
+    border-collapse: collapse;
+}
+
+.t-c {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.t-c table td {
+    flex-wrap: wrap;
+}
+
+.t-c table button {
+    width: 6rem;
+    height: 2rem;
+    border: none;
+}
+
+.t-c table .pv:hover {
+    border: none;
+    color: white;
+    background-color: green;
+}
+
+.t-c table .delete:hover {
+    border: none;
+    color: black;
+    background-color: yellow;
+}
+
+.t-c table input {
+    width: 80%;
+    height: 2rem;
+}
+
+th {
+    color: white;
+    background-color: green;
+}
+
+td {
+    background-color: lightblue;
+}
+
+th, td {
+    padding: 1rem;
+    border: 2px solid blue;
+}
+
 @media only screen and (min-width: 320px) and (max-width: 425px) {
     .header {
         color: #ffffff;
-        /* position: fixed; */
         width: 100%;
         height: 15rem;
         top: 0;
         background-color: rgb(80, 80, 255);
-        border-bottom: 1px solid yellow;
+        border-bottom: 2px solid yellow;
     }
+
+    .main-content {
+        width: 100%;
+        /* flex-grow: 1; */
+        padding: 0.5rem;
+        position: relative;
+    }
+
+    .overview {
+        width: 100%;
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .card {
+        width: 100%;
+        color: #fff;
+        flex-wrap: wrap;
+        padding: 0.5rem;
+        background-color: #aba2f8;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    }
+
+    footer {
+        border-bottom: 2px solid yellow;
+    }
+
     .dashboard-container {
         display: flex;
-        width: 20%;
-        /* height:100vh; */
-        /* position: relative; */
+        width: 60%;
         place-items: center;
+    }
+
+    .t-c {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+
+    table {
+        width: 90%;
+    }
+
+    .t-c table input {
+        width: 80%;
+        height: 0.2rem;
+    }
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    /* padding: 20px; */
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+h1 {
+    color: #2c3e50;
+    font-size: 2.5rem;
+    animation: slideInFromTop 1s ease-out;
+}
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    /* margin: 20px 0; */
+    animation: fadeIn 2s ease-in-out;
+}
+.btn {
+    display: inline-block;
+    /* padding: 10px 20px; */
+    font-size: 1rem;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    animation: bounceIn 2s ease-in-out;
+}
+.btn:hover {
+    background-color: #2980b9;
+    transform: scale(1.1);
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
     }
 }
