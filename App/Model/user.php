@@ -59,7 +59,8 @@ class User
         $stmt->bindParam(":email", $email1, PDO::PARAM_STR);
         $stmt->execute();
         $mtu = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($email1 == $mtu['email']) {
+
+        if ($stmt->rowCount() == 1) {
             
             if ($mtu && password_verify($password1, $mtu['password'])) {
 
@@ -108,6 +109,7 @@ class User
        $sql = "CREATE TABLE IF NOT EXISTS users ( `id` int(11) NOT NULL AUTO_INCREMENT, `username` VARCHAR(255) NOT NULL, `email` VARCHAR(255) NOT NULL, `password` VARCHAR(255) NOT NULL, `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id) );";
 
        $kibalanga->exec($sql);
+       $stmt = $kibalanga->prepare($sql);
 
         $query = "SELECT * FROM `{$this->table}` WHERE email=:email";
         $stmt = $kibalanga->prepare($query);
@@ -125,7 +127,6 @@ class User
             $stmt->bindParam(":password", $msimbo, PDO::PARAM_STR);
             $stmt->bindParam(":token", $token, PDO::PARAM_STR);
             $stmt->execute();
-            // $stmt->execute([':name' => $jina, ':email' => $pepe, ':password' => $msimbo, ':token' => $token]);
 
             if ($stmt->rowCount() == 1) {
                 return [
@@ -157,7 +158,7 @@ class User
         $jina = $eshod->guard($name);
         $pepe = $eshod->guard($email);
         
-        $query = "UPDATE `users` SET username=:uname, email=:email WHERE id=:id";
+        $query = "UPDATE `users` SET username=:uname, email=:email WHERE token=:id";
 
         $stmt = $kibalanga->prepare($query);
         $stmt->execute([
@@ -184,34 +185,24 @@ class User
         $kibalanga = $sam->connect();
         $eshod = new Security();
 
-        // $uid = $eshod->guard($session_id);
+        $uid = $eshod->guard($session_id);
 
-        $query = "SELECT * FROM `sessions` WHERE session_id=:session_id";
-        $stmt = $kibalanga->prepare($query);
-        $stmt->bindParam(":session_id", $session_id, PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+       
 
-            $sql = "DELETE FROM `{$this->table}` WHERE id=:id";
-            $stmt = $kibalanga->prepare($sql);
-            $stmt->bindParam(":id", $user['uid'], PDO::PARAM_INT);
-            
-            if ($stmt->execute()) {
-                return [
-                    'status' => 'success',
-                    'message' => 'Delete successful'
-                ];
-            } else {
-                return [
-                    'status' => 'fail',
-                    'message' => 'Delete fail'
-                ];
-            }
+        $sql = "DELETE FROM `{$this->table}` WHERE token=:id";
+        $stmt = $kibalanga->prepare($sql);
+        $stmt->bindParam(":id", $uid, PDO::PARAM_INT);
+        $stmt->execute();
 
+        if ($stmt->rowCount() == 1) {
+            return [
+                'status' => 'success',
+                'message' => 'Delete successful'
+            ];
         } else {
             return [
                 'status' => 'fail',
-                'message' => 'Invalid session id'
+                'message' => 'Delete fail'
             ];
         }
     }

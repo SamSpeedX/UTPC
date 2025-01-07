@@ -17,7 +17,7 @@
 <div class="register-container">
     <h2>Create Account</h2>
     <p>Please your credential to register your acconut.</p>
-    <form action="user_register" method="POST">
+    <form action="sajili" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 
@@ -26,14 +26,6 @@
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-
-        <!-- <label for="confirm_password">Verify password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required> -->
-
-        <!-- <div class="limks-f">
-            <p></p>
-            <p><span id="statu"></span><input type="checkbox" id="check"></p>
-        </div> -->
 
         <button type="submit" onclick="user_register()">Register</button>
         <p>You have Account? <a href="login">Login</a>.</p>

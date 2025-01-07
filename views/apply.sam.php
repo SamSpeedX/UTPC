@@ -1,22 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-// require "config/app.php";
-// require "core/Database.php";
-
-try {
-    $sam = new Database();
-    $pdo = $sam->connect();
-
-    // Fetch all questionnaire data
-    $stmt = $pdo->query("SELECT * FROM questionnaires");
-    $questions = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("Database error: " . $e->getMessage());
-}
+Session::check();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,10 +10,8 @@ try {
     <link rel="apple-touch-icon" href="assets/img/icon.jpeg">
     <link rel="icon" href="assets/img/icon.jpeg">
     <title>application | <?php echo APP_NAME; ?></title>
-    <!-- <link rel="stylesheet" href="assets/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="assets/css/all.min.css"> -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="assets/css/userform.css">
-    <!-- <link rel="stylesheet" href="assets/css/app.css"> -->
 
     <style>
         /* body {
@@ -55,7 +37,8 @@ try {
 <!-- <div class="psc"></div> -->
     <h1>Personal Training Questionnaire</h1>
     <form action="submit_questionnaire.php" method="POST">
-        <?php foreach ($questions as $index => $question): ?>
+        <?php if ($questions !== null) {
+         foreach ($questions as $index => $question): ?>
             <div class="question">
                 <label for="q<?= $index; ?>"><?= htmlspecialchars($question['question']); ?></label>
                 <?php
@@ -97,7 +80,9 @@ try {
                 }
                 ?>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach; } else { ?>
+            sam
+        <?php } ?>
 
         <button type="submit">Submit</button>
     </form>

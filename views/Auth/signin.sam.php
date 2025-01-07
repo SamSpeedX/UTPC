@@ -26,12 +26,12 @@
 
         <div class="limks-f">
             <p><a href="resetpass">Forgot password</a></p>
-            <!-- <p><input type="checkbox" id="check" onclick="check()"></p> -->
         </div>
 
         <button type="submit" onclick="user_login()">Login</button>
         <p>You dont't have account? <a href="register">Register</a>.</p>
     </form>
+    <p><a href="in">Login as Admin.</a></p>
 </div>
 <script>
     const inp = document.getElementById("check");

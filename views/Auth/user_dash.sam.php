@@ -33,7 +33,7 @@ $user = $action->readone($_SESSION['token']);
         <ul>
             <li><a href="/home">home</a></li>
             <br>
-            <li><a href="apply">Apply</a></li><br>
+            <!-- <li><a href="apply">Apply</a></li><br> -->
             <li><a href="myapplication">My Application</a></li><br>
             <li><a href='/updateuser'>Update Account</a></li><br>
             <li><a href="/updatepassword">Update password</a></li><br>

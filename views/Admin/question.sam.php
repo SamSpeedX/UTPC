@@ -1,3 +1,6 @@
+<?php
+Admin::fetch();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,7 @@
             <nav>
                 <ul>
                     <li><a href="/">home</a></li> |
-                    <li><a href="boss">Dashboard</a></li>|
+                    <li><a href="dashboard">Dashboard</a></li>|
                     <li><a href="logout">Logout</a></li>
                 </ul>
             </nav>
@@ -28,8 +31,17 @@
     <div class="container">
         <h1>Create Questions</h1>
         <form id="questionnaire-form">
+        <!-- <label>Heading :</label>
+        <input type="text" name="headings" placeholder="Enter heading for this question" required> -->
             <div id="questions-container">
+                
                 <div class="question">
+                <div class="q"> 
+                <label>Heading :</label>
+                <input type="text" name="headings" placeholder="Enter heading for this question" required> 
+                <br><br>
+                 </div>
+                <!-- <br><br> -->
                     <label for="question-1">Question 1:</label>
                     <input type="text" name="questions[]" placeholder="Enter question text" required>
                     <select name="input_types[]" required>
@@ -60,8 +72,8 @@
             <p><?php echo date('Y').'&copy;  ';  echo "UTPC"; ?></p>
         </div>
     </footer>
-    <script src="script.js"></script>
-    <script>
+    <script src="assets/js/app.js"></script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
     const questionsContainer = document.getElementById('questions-container');
     const addQuestionButton = document.getElementById('add-question');
@@ -129,6 +141,7 @@
         const questions = questionsContainer.querySelectorAll('.question');
 
         questions.forEach((question, index) => {
+            // const header = question.querySelector('input[name="header[]"]').value;
             const questionText = question.querySelector('input[name="questions[]"]').value;
             const inputType = question.querySelector('select[name="input_types[]"]').value;
             const options = question.querySelector('textarea[name="options[]"]').value.split(',');
@@ -180,13 +193,6 @@
         e.preventDefault();
 
         const formData = new FormData(form);
-        // fetch('http://localhost:8080/save_questionnaire.php', {
-        //     method: 'POST',
-        //     body: formData,
-        // })
-        //     .then(response => response.text()) // Log raw text for debugging
-        //     .then(data => console.log(data))
-        //     .catch(error => console.error("Fetch error:", error));
         
         fetch('http://localhost:8080/save_questionnaire.php', {
             method: 'POST',
@@ -194,6 +200,15 @@
         })
             .then((response) => response.json())
             .then((data) => {
+                const era =document.createElement('div');
+                era.style.display="block";
+                era.style.padding="0.7rem";
+                era.style.backgroundColor="green";
+                era.style.color="white";
+                era.style.position="fixed";
+                era.style.top="4rem";
+                era.innerHTML=data.message;
+
                 responseDiv.textContent = data.message;
                 responseDiv.style.color = data.status === 'success' ? 'green' : 'red';
             })
@@ -204,6 +219,7 @@
     });
 });
 
-    </script>
+    </script> -->
+
 </body>
 </html>

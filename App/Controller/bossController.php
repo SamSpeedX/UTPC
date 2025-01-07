@@ -1,7 +1,11 @@
-<?php
-require "App/Model/user.php";
 
-class UserController
+<?php
+// php framework by SAM TECHNOLOGY.
+// customise as you wish
+
+require "App/Model/boss.php";
+
+class bossController
 {
     // 
     public function index()
@@ -9,23 +13,30 @@ class UserController
         // 
     }
 
+    public function application()
+    {
+        $app = new boss();
+        $response = $app->applications();
+        return $response;
+    }
+
     public function readone($session_id)
     {
-        $user = new User();
+        $user = new boss();
         $result = $user->user($session_id);
         return $result;
     }
 
     public function users()
     {
-        $user = new User();
+        $user = new boss();
         $users = $user->readAll();
         return $users;
     }
 
     public function login($request)
     {
-        $user = new User();
+        $user = new boss();
 
         $email = $request['email'];
         $password = $request["password"];
@@ -34,8 +45,8 @@ class UserController
 
         if ($result['status'] == 'success') {
             // process your session
-            $_SESSION['token'] = $result['session_id'];
-            return Redirect::to('home');
+            $_SESSION['uid_boss'] = $result['session_id'];
+            return Redirect::to('dashboard');
 
         } else {
             // error message.
@@ -45,7 +56,7 @@ class UserController
 
     public function register($request)
     {
-        $user = new User();
+        $user = new boss();
 
         $name = $request['username'];
         $email = $request['email'];
@@ -63,25 +74,26 @@ class UserController
 
     public function update($request)
     {
-        $user = new user();
+        $boss = new boss();
         $id = $request['token'];
         $name = $request['username'];
         $email = $request['email'];
-        $result = $user->update($id, $name, $email);
+        $result = $boss->update($id, $name, $email);
 
         if ($result['status'] == 'success') {
-            Redirect::to('profile');
+            return Redirect::to('dashboard');
         }
     }
 
-    public function delete($request)
+    public function delete($data)
     {
-        $user = new User();
-        $token = $request['token'];
-        $response = $user->delete($token);
+        $boss = new boss();
+
+        $token = $data['token'];
+        $response = $boss->delete($token);
 
         if ($response['status'] == 'success') {
-            Redirect::to('logout');
+            return Redirect::to('logout');
         } 
     }
 
@@ -90,6 +102,6 @@ class UserController
         session_destroy();
         session_abort();
 
-        Redirect::to('home');
+        return Redirect::to('home');
     }
 }

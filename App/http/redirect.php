@@ -6,4 +6,9 @@ class Redirect
     {
         header('location: '.$view);
     }
+
+    public static function into($view)
+    {
+        require "views/{$view}.sam.php";
+    }
 }

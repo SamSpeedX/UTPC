@@ -1,5 +1,5 @@
 <?php 
-Session::check();
+Admin::fetch();
 ?>
 <!DOCTYPE html>
 <html lang="sw">
@@ -18,18 +18,13 @@ Session::check();
     <h2>Update Your Account.</h2>
     <p>fill your credential bellow to make change.</p>
     <form action="change" method="POST">
-        <input type="hidden" name="id" value="<?php echo $_SESSION['token']; ?>">
+        <input type="hidden" name="id" value="<?php echo $_SESSION['uid_boss']; ?>">
         
         <label for="password">password:</label>
         <input type="password" id="password"  name="password" required>
 
-        <!-- <div class="limks-f">
-            <p></p>
-            <p><input type="checkbox" id="check"></p>
-        </div> -->
-
         <button type="submit" onclick="user_login()">save</button>
-        <p><a href="profile">Go back</a></p>
+        <p><a href="dashboard">Go back</a></p>
     </form>
 </div>
 <script scr=""></script>

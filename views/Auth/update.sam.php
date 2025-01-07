@@ -1,4 +1,5 @@
 <?php 
+Session::check();
 $user = $action->readone($_SESSION['token']);
 ?>
 <!DOCTYPE html>
@@ -9,7 +10,7 @@ $user = $action->readone($_SESSION['token']);
     <link rel="shortcut icon" href="assets/img/icon.jpeg" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/img/icon.jpeg">
     <link rel="icon" href="assets/img/icon.jpeg">
-    <title>Login | <?php echo APP_NAME; ?></title>
+    <title>Update | <?php echo APP_NAME; ?></title>
     <link rel="stylesheet" href="assets/css/userform.css">
 </head>
 <body>
@@ -18,7 +19,7 @@ $user = $action->readone($_SESSION['token']);
     <h2>Update Your Account.</h2>
     <p>fill your credential bellow to make change.</p>
     <form action="change" method="POST">
-        <input type="hidden" name="id" value="<?php echo $_SESSION['token']; ?>">
+        <input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>">
         <label for="username">username:</label>
         <input type="text" id="username" value="<?php echo $user['username'] ?>" name="username" required>
         

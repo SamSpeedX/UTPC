@@ -27,9 +27,10 @@ form {
 
 .question {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     gap: 10px;
-    flex: 1;
+    flex-wrap: wrap;
+    /* flex: 1; */
 }
 
 label {
